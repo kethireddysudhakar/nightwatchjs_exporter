@@ -61,6 +61,7 @@ func getConfig() (Config, error) {
 	if err != nil {
 		return c, err
 	}
+	//fmt.Println("testdir: " + args["--testdir"].(string))
 	c.NightwatchjsDir = args["--testdir"].(string)
 	c.NightwatchjsCmd = args["--nightwatch"].(string)
 	c.ListenAddr = args["--listen"].(string)
