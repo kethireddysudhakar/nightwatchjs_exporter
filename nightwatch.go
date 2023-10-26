@@ -108,7 +108,7 @@ func run_nightwatch(wd string, cfg Config) (NightwatchResult, error) {
 	fmt.Println(os.Getwd())
 	//os.Chdir("/Users/sudhakarkethireddy/Documents/synthetics/night3")
 	fmt.Println(cfg.NightwatchjsDir + "reporter:" + reporterFile)
-	cmd := exec.Command("npx", "nightwatch", cfg.NightwatchjsDir, "--repoter", reporterFile)
+	cmd := exec.Command("npx", "nightwatch", cfg.NightwatchjsDir, "--reporter", reporterFile)
 	//cmd := exec.Command("npx", "nightwatch", "/Users/sudhakarkethireddy/Documents/synthetics/night3/nightwatch/examples/basic/salesgeico.js", "--reporter", "/Users/sudhakarkethireddy/Documents/GitHub/nightwatchjs_exporter/nightwatch_json_reporter.js")
 	cmdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -123,26 +123,6 @@ func run_nightwatch(wd string, cfg Config) (NightwatchResult, error) {
 	nwError := make(chan error)
 	//fmt.Println("result:" + nwError.(string))
 	go func(stdout io.ReadCloser) {
-		/* scanner1 := bufio.NewScanner(stdout)
-		scanner1.Split(bufio.ScanLines)
-		buf := make([]byte, 0, 64*1024)
-		scanner1.Buffer(buf, 1024*1024)
-		for ok := true; ok != false; ok = scanner1.Scan() {
-			t1 := scanner1.Text()
-			fmt.Println("scanner1:" + t1)
-			/* if t == "NIGHTWATCHJSON" {
-				fmt.Println("textNext" + t)
-				nightwatchJson = scanner.Text()
-				if ok := scanner.Scan(); ok != true {
-					nwError <- fmt.Errorf("Error reading from nightwatch")
-					return
-				}
-				nightwatchJson = scanner.Text()
-				fmt.Printf("%+v\n", nightwatchJson)
-				break
-			}
-		} */
-
 		scanner := bufio.NewScanner(stdout)
 		scanner.Split(bufio.ScanLines)
 		buf := make([]byte, 0, 64*1024)
